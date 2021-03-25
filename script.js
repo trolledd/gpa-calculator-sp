@@ -1,9 +1,3 @@
-/* document.addEventListener('input',function(e){
-  console.log(e)
-  if(e.target && e.target.id== 'brnPrepend'){
-        //do something
-   }
-}); */
 var noOfSemModules = []
 
 function getThisSemCumGPA(sem) {
