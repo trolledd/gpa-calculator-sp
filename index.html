@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="container pt-5">
+        <div class="pb-5">
+            <div class="border border-primary rounded" id="div1">
+                <h3>Semester 1</h3>
+                <form id="Sem1">
+                    <div class="row">
+                        <div class="col-sm">
+                            <input type="" class="form-control" id="S1N1" placeholder="Module Name (Optional)">
+                        </div>
+                        <div class="col-sm">
+                            <select class="form-control dropdown-toggle" id="S1G1" onchange="updateGPA(1, 1)">
+                                <option selected>Grade</option>
+                                <option value="4">A</option>
+                                <option value="3.5">B+</option>
+                                <option value="3">B</option>
+                                <option value="2.5">C+</option>
+                                <option value="2">C-</option>
+                                <option value="1.5">D+</option>
+                                <option value="1.0">D</option>
+                                <option value="0.5">D-</option>
+                                <option value="0.5">P</option>
+                            </select>
+
+                        </div>
+                        <div class="col-sm">
+                            <input type="number" class="form-control" id="S1C1" placeholder="Credits"
+                                oninput="updateGPA(1, 1)">
+                        </div>
+                    </div>
+                    <hr>
+                </form>
+                <div class="pb-2">
+                    <div class="row">
+                        <div class="col-sm-3 pr-0" id="S1">
+                            <b>Calculate:</b>
+                            <p>Grade Point * Credit Unit</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="pb-2">
+                    <div class="row">
+                        <div class="col-sm-2 pr-0">
+                            <b>Semester 1 GPA:</b>
+                        </div>
+                        <div class="col-sm-1">
+                            <p id="cumGPA1">0.00</p>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="addModule(1, 2)">Add Module</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="addSemester()">Add Semester</button>
+    </div>
+
+</body>
+
+</html>
