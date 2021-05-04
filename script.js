@@ -2,17 +2,27 @@ var noOfSemModules = []
 
 function getThisSemCumGPA(sem) {
   let moduleCount = $(`[id^=S${sem}M]`).length;
-  let lastModuleCountID = $(`[id^=S${sem}M]`)[moduleCount-1].id;
-  let lastModuleCountIDNum = lastModuleCountID.substring(lastModuleCountID.indexOf("M") + 1)
+
   let MCU = 0, semModuleSum = 0;
-  for(let i = 0; i < lastModuleCountIDNum; i++){
-    if($(`#S${sem}M${i+1}`).text() != ""){
-      MCU += parseFloat($(`#S${sem}M${i+1}`).text().split(" ")[2]);
-      semModuleSum += parseFloat($(`#S${sem}M${i+1}`).text().split(" ")[4]);
+  let lastModuleCount = $(`[id^=S${sem}M]`)[moduleCount-1]
+
+  if(lastModuleCount != undefined){
+    let lastModuleCountID = lastModuleCount.id;
+    let lastModuleCountIDNum = lastModuleCountID.substring(lastModuleCountID.indexOf("M") + 1)
+    for(let i = 0; i < lastModuleCountIDNum; i++){
+      if($(`#S${sem}M${i+1}`).text() != ""){
+        MCU += parseFloat($(`#S${sem}M${i+1}`).text().split(" ")[2]);
+        semModuleSum += parseFloat($(`#S${sem}M${i+1}`).text().split(" ")[4]);
+      }
     }
   }
+
   semGPA = semModuleSum/MCU;
-  document.getElementById(`cumGPA${sem}`).innerHTML = semGPA
+  if(Number.isNaN(semGPA)){
+    semGPA = 0;
+    semGPA = semGPA.toFixed(2);
+  }
+  document.getElementById(`cumGPA${sem}`).innerHTML = semGPA;
 }
 
 function updateGPA(sem, module) {
