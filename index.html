@@ -59,14 +59,18 @@
                 </form>
                 <div class="pb-2">
                     <div class="row">
-                        <div class="col-sm-3 pr-0" id="S1">
+                        <div class="col-sm-6 pr-0" id="S1">
                             <b>Calculate:</b>
-                            <p>Grade Point * Credit Unit</p>
+                            <p>Grade Point * Credit Unit = Grade Point For Module</p>
                         </div>
-                        
+                        <div id="TotalS1"> 
+                        </div>
                     </div>
                 </div>
-                <div class="pb-2">
+
+                
+
+                <div class="pb-2" id="Append1">
                     <div class="row">
                         <div class="col-sm-2 pr-0">
                             <b>Semester 1 GPA:</b>
@@ -75,7 +79,8 @@
                             <p id="cumGPA1">0.00</p>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="addModule(1, 2)">Add Module</button>
+                        <button type="submit" class="btn btn-primary" onclick="addModule(1, 2)">Add Module</button>
+                        <button type="submit" class="btn btn-primary" onclick="hideCal(1)" id="BtnS1">Hide Details</button>
                 </div>
             </div>
         </div>

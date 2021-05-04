@@ -22,6 +22,7 @@ function getThisSemCumGPA(sem) {
     semGPA = 0;
     semGPA = semGPA.toFixed(2);
   }
+  document.getElementById(`TotalS${sem}`).innerHTML = `<hr>${semModuleSum} / ${MCU} = ${semGPA}<hr>`;
   document.getElementById(`cumGPA${sem}`).innerHTML = semGPA;
 }
 
@@ -50,6 +51,27 @@ function updateGPA(sem, module) {
     getThisSemCumGPA(sem)
   }
   // gradeVal = $(`#S${sem}G${module}`).value;
+}
+
+function hideCal(semNo){
+  document.getElementById(`S${semNo}`).style.display = "none";
+  document.getElementById(`TotalS${semNo}`).style.display = "none";
+
+  $(`#BtnS${semNo}`).remove()
+  $(`#Append${semNo}`).append(`
+  <button type="submit" class="btn btn-primary" onclick="showCal(${semNo})" id="BtnS${semNo}">Show Details</button>
+  `)
+}
+
+
+function showCal(semNo){
+  document.getElementById(`S${semNo}`).style.display = "block";
+  document.getElementById(`TotalS${semNo}`).style.display = "block";
+
+  $(`#BtnS${semNo}`).remove()
+  $(`#Append${semNo}`).append(`
+  <button type="submit" class="btn btn-primary" onclick="hideCal(${semNo})" id="BtnS${semNo}">Hide Details</button>
+  `)
 }
 
 function addModule(semNo) {
@@ -117,14 +139,15 @@ function addSemester() {
                   </form>
                   <div class="pb-2">
                     <div class="row">
-                        <div class="col-sm-3 pr-0" id="S${currentSem}">
+                        <div class="col-sm-6 pr-0" id="S${currentSem}">
                             <b>Calculate:</b>
-                            <p>Grade Point * Credit Unit</p>
+                            <p>Grade Point * Credit Unit = Grade Point For Module</p>
                         </div>
-                        
+                        <div id="TotalS${currentSem}"> 
+                        </div>
                     </div>
                 </div>
-                  <div class="pb-2"> 
+                  <div class="pb-2" id="Append${currentSem}"> 
                     <div class="row">
                         <div class="col-sm-2 pr-0">
                             <b>Semester ${currentSem} GPA:</b>
@@ -135,6 +158,7 @@ function addSemester() {
                     </div>
 
                       <button type="submit" class="btn btn-primary" onclick="addModule(${currentSem}, 2)">Add Module</button>
+                      <button type="submit" class="btn btn-primary" onclick="hideCal(${currentSem})" id="BtnS${currentSem}">Hide Details</button>
                   </div> 
             </div>
     `)
