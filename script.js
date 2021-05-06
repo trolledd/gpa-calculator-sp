@@ -1,4 +1,5 @@
 var noOfSemModules = []
+var calOverallGPA = {}
 
 function getThisSemCumGPA(sem) {
   let moduleCount = $(`[id^=S${sem}M]`).length;
@@ -18,12 +19,40 @@ function getThisSemCumGPA(sem) {
   }
 
   semGPA = semModuleSum/MCU;
+
   if(Number.isNaN(semGPA)){
     semGPA = 0;
     semGPA = semGPA.toFixed(2);
   }
+
+  /* if((sem in calOverallGPA) == false){
+    console.log("sem is not created")
+  // console.log(jQuery.isEmptyObject(calOverallGPA[1]))
+  } */
+
+  calOverallGPA[sem] = {'semModuleSum': semModuleSum, 'MCU': MCU}
+  updateOverallGPA();
+
   document.getElementById(`TotalS${sem}`).innerHTML = `<hr>${semModuleSum} / ${MCU} = ${semGPA}<hr>`;
   document.getElementById(`cumGPA${sem}`).innerHTML = semGPA;
+}
+
+function updateOverallGPA(){
+  var overallModuleSum = 0, overallMCU = 0;
+  for(let i = 0; i < Object.keys(calOverallGPA).length; i++){
+  // console.log(Object.keys(calOverallGPA)[i]);
+  overallModuleSum += calOverallGPA[Object.keys(calOverallGPA)[i]]['semModuleSum']
+  overallMCU += calOverallGPA[Object.keys(calOverallGPA)[i]]['MCU']
+  }
+
+  overallGPA = overallModuleSum/overallMCU
+
+  if(Number.isNaN(overallGPA)){
+    overallGPA = 0;
+    overallGPA = overallGPA.toFixed(2);
+  }
+
+  document.getElementById(`overallGPA`).innerHTML = overallGPA;
 }
 
 function updateGPA(sem, module) {
@@ -59,7 +88,7 @@ function hideCal(semNo){
 
   $(`#BtnS${semNo}`).remove()
   $(`#Append${semNo}`).append(`
-  <button type="submit" class="btn btn-primary" onclick="showCal(${semNo})" id="BtnS${semNo}">Show Details</button>
+  <button type="submit" class="btn btn-outline-info" onclick="showCal(${semNo})" id="BtnS${semNo}">Show Details</button>
   `)
 }
 
@@ -70,7 +99,7 @@ function showCal(semNo){
 
   $(`#BtnS${semNo}`).remove()
   $(`#Append${semNo}`).append(`
-  <button type="submit" class="btn btn-primary" onclick="hideCal(${semNo})" id="BtnS${semNo}">Hide Details</button>
+  <button type="submit" class="btn btn-outline-warning" onclick="hideCal(${semNo})" id="BtnS${semNo}">Hide Details</button>
   `)
 }
 
@@ -104,6 +133,12 @@ function addModule(semNo) {
        </div>
        <hr>`
   )
+}
+
+function addMultipleModule(semNo, count){
+  for(let i = 0; i < count; i++){
+    addModule(semNo);
+  }
 }
 
 function addSemester() {
@@ -157,9 +192,18 @@ function addSemester() {
                         </div>
                     </div>
 
-                      <button type="submit" class="btn btn-primary" onclick="addModule(${currentSem}, 2)">Add Module</button>
-                      <button type="submit" class="btn btn-primary" onclick="hideCal(${currentSem})" id="BtnS${currentSem}">Hide Details</button>
+                      <button type="submit" class="btn btn-outline-primary" onclick="addModule(${currentSem})">Add 1 Module</button>
+                      <button type="submit" class="btn btn-outline-warning" onclick="hideCal(${currentSem})" id="BtnS${currentSem}">Hide Details</button>
                   </div> 
+
+                  <div class="row">
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="No. of Modules to add" aria-label="No. of Modules to add" aria-describedby="button-addon2" id="moduleCount${currentSem}">
+                            <button class="btn btn-outline-secondary" type="button" onclick="addMultipleModule(${currentSem}, document.getElementById('moduleCount${currentSem}').value)">Add</button>
+                          </div>
+                    </div>
+                </div>
             </div>
     `)
 }

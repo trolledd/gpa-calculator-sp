@@ -27,7 +27,7 @@
                 <input type="submit" value="Submit">
             </form>
         </div> -->
-        <div class="pb-5">
+        <div class="pb-3">
             <div class="border border-primary rounded" id="div1">
                 <h3>Semester 1</h3>
                 <form id="Sem1">
@@ -79,13 +79,31 @@
                             <p id="cumGPA1">0.00</p>
                         </div>
                     </div>
-                        <button type="submit" class="btn btn-primary" onclick="addModule(1, 2)">Add Module</button>
-                        <button type="submit" class="btn btn-primary" onclick="hideCal(1)" id="BtnS1">Hide Details</button>
+                        <button type="submit" class="btn btn-outline-primary" onclick="addModule(1)">Add 1 Module</button>
+                        <button type="submit" class="btn btn-outline-warning" onclick="hideCal(1)" id="BtnS1">Hide Details</button>
+
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="No. of Modules to add" aria-label="No. of Modules to add" aria-describedby="button-addon2" id="moduleCount1">
+                            <button class="btn btn-outline-secondary" type="button" onclick="addMultipleModule(1, document.getElementById('moduleCount1').value)">Add</button>
+                          </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" onclick="addSemester()">Add Semester</button>
+        <div class="row">
+            <div class="col-sm-2 pr-0">
+                <b>Overall GPA:</b>
+            </div>
+            <div class="col-sm-1">
+                <p id="overallGPA">0.00</p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary" onclick="addSemester()">Add Semester</button>
     </div>
 
 </body>
